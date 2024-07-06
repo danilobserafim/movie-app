@@ -24,7 +24,7 @@ export default function ShowMovie({ movie }: Props) {
     }, [movie])
     return (
         <motion.div variants={animate} initial="hidden" animate="visible"
-            className=' overflow-y-scroll h-[100vh] w-[100%] mx-auto flex gap-8 relative flex-wrap z-20 p-4
+            className=' overflow-y-scroll h-[100vh] w-[100%] mx-auto flex gap-8 relative flex-wrap z-40 p-4
                 md:mt-8 md:flex-nowrap  md:h-auto md:overflow-hidden 
                 lg:w-[1000px] 
          '
