@@ -22,7 +22,7 @@ Após a instalação o projeto estará rodando em http://localhost:5173
 
 </br>
 
-## Tecnologías
+## Tecnologias
 • React    
 • tailwindcss    
 • shadcn    
