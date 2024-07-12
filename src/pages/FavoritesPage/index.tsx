@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header'
-import { movieDTO } from '../SearchPage/DTO'
-import CarouselMovie from '../../components/CarusselMovie';
+import { movieDTO } from '../../DTOs/MovieDTO'
+import CarouselMovie from '../../components/CarouselMovie';
+
+const baseURL = import.meta.env.VITE_API_BASE_URL
 
 export default function FavoritePage() {
   const [movies, setMovies] = useState<movieDTO[]>([])
@@ -22,31 +24,20 @@ export default function FavoritePage() {
     <>
       <Header />
 
-      <div className='fmx-auto  bg-black min-h-[100vh] overflow-hidden'>
-        <div>
-          <h2 className='w-full pl-4 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 mt-8' >Filmes</h2>
-          <CarouselMovie data={movies} onClose={() => setReload(!reload)} />
-        </div>
+      <div className='mx-auto  bg-black min-h-[100vh] overflow-hidden'>
 
-        <div>
-          <h2 className='w-full pl-4 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 mt-8'>Series</h2>
-          <CarouselMovie data={series} onClose={() => setReload(!reload)} />
-        </div>
+          {movies[0] &&<CarouselMovie data={movies} onClose={() => setReload(!reload)} title='Movies'/>}
 
-        <div>
-          <h2 className='w-full pl-4 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 mt-8'>Docs</h2>
-          <CarouselMovie data={docs} onClose={() => setReload(!reload)}/>
-        </div>
+          {series[0] && <CarouselMovie data={series} onClose={() => setReload(!reload)} title='Series'/>}
 
-        <div>
-          <h2 className='w-full pl-4 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 mt-8'>Biographies</h2>
-          <CarouselMovie data={bio} onClose={() => setReload(!reload)}/>
-        </div>
+          {docs[0] && <CarouselMovie data={docs} onClose={() => setReload(!reload)} title='Docs'/>}
+
+          {bio[0] && <CarouselMovie data={bio} onClose={() => setReload(!reload)} title='Biographies'/>}
       </div>
     </>
   )
   async function getFavoritesMovies() {
-    await fetch("http://localhost:3333/movies").then(response => response.json()).then(data => {
+    await fetch(`${baseURL}/movies`).then(response => response.json()).then(data => {
       setMovies(data.filter((movie: movieDTO) => {
         if (movie.Type == "movie" 
           && !movie.Genre.split(", ").some((gen: string) => gen == "Documentary") 

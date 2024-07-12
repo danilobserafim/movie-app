@@ -1,5 +1,5 @@
 export type movieDTO = {
-   id?: number,
+   id?: string,
    Title: string,
    Year: string,
    Rated: string,

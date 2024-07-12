@@ -9,15 +9,20 @@ import {
 import SearchPage from './pages/SearchPage';
 import FavoritePage from './pages/FavoritesPage';
 import { Toaster } from 'sonner';
+import Details from './pages/Details';
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <FavoritePage />,
+  },
   {
     path: "/search/:dataSearch",
     element: <SearchPage />,
   },
   {
-    path: "/",
-    element: <FavoritePage />,
+    path: "/details/:dataSearch",
+    element: <Details />,
   },
 ]);
 

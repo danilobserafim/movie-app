@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { movieDTO } from './DTO'
+import { movieDTO } from '../../DTOs/MovieDTO'
 import ShowMovie from '../../components/ShowMovie'
 import Header from '../../components/Header'
 import { useParams } from 'react-router-dom'
@@ -22,14 +22,11 @@ export default function SearchPage() {
         <div className='pb-16 text-white min-h-[100vh]'>
             <Header />
             {isLoading && <div className='flex justify-center h-[80vh] items-center'><Spinner /></div>}
-            {movie && !isLoading && (<ShowMovie movie={movie} />)}
-            {
-                !movie && !isLoading && (              <div>
+            {!movie && !isLoading && (<div>
                     <h1 className='text-3xl mt-10 text-center'>Titulo não encontrado</h1>
                     <p className='text-xl  text-center'>Verifique sua busca</p>
-                </div>)
-            }
-
+                </div>)}
+                {movie && !isLoading && (<ShowMovie movie={movie} />)}
         </div>
     )
 

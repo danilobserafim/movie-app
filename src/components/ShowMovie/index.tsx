@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { Badge } from '../ui/badge'
-import { movieDTO } from '../../pages/SearchPage/DTO'
+import { movieDTO } from '../../DTOs/MovieDTO'
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { AiFillCheckCircle } from 'react-icons/ai';
+import AcordeonSeasons from '../AcordeonSeasons';
+
+const baseURL = import.meta.env.VITE_API_BASE_URL
 
 type Props = {
     movie: movieDTO
@@ -16,23 +21,37 @@ const animate = {
         opacity: 1
     }
 }
+const animateLike = {
+    hidden: { opacity: 0 },
+    visible: {
+
+        opacity: 1
+    }
+}
+
 
 export default function ShowMovie({ movie }: Props) {
+    const navigate = useNavigate()
+
     const [liked, setLiked] = useState(false)
     useEffect(() => {
         verifyMovieIsLiked()
     }, [movie])
     return (
         <motion.div variants={animate} initial="hidden" animate="visible"
-            className=' overflow-y-scroll h-[100vh] w-[100%] mx-auto flex gap-8 relative flex-wrap z-40 p-4
-                md:mt-8 md:flex-nowrap  md:h-auto md:overflow-hidden 
-                lg:w-[1000px] 
-         '
-            onDoubleClick={LikeMovie} >
-            <Button onClick={LikeMovie} variant={'ghost'} className='absolute right-2 top-20 text-2xl z-20 md:top-0'>{liked ? "❤" : "🤍"}</Button>
+            className=' overflow-y-scroll h-[100vh] w-[100%] mx-auto flex gap-8 relative flex-wrap z-40 p-4 text-white
+                md:mt-8 md:flex-nowrap  md:h-min md:overflow-hidden 
+                lg:w-[1000px]'
+        >
             <img src={movie.Poster} alt="" className='w-[100vw] z-10 md:h-[100%] md:w-auto' />
             <div className='sm:px-8 '>
-                <h1 className='text-2xl font-bold mb-4 mt-[-8px]'>{movie.Title}</h1>
+                <div className='flex justify-between items-center  mb-4 mt-[-8px]'>
+                    <h1 className='text-2xl font-bold'>{movie.Title}</h1>
+                    <Button onClick={LikeMovie} variant={'ghost'} className='active:scale-90  text-2xl z-20'>{liked ?
+                        (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle className='text-green-500' /></motion.div>) :
+                        (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle /></motion.div>)}
+                    </Button>
+                </div>
                 <p className='text-gray-500 font-semibold text-md'>
                     {movie.Plot}
                 </p>
@@ -45,9 +64,11 @@ export default function ShowMovie({ movie }: Props) {
                 <p><b>Duration: </b>{movie.Runtime}</p>
                 <p><b>Language: </b>{movie.Language}</p>
                 <p><b>Type: </b>{movie.Type}</p>
-
-                {movie.totalSeasons && <p><b>Total seasons: </b>{movie.totalSeasons}</p>}
-                <div className='md:absolute md:bottom-0 md:right-0 bg-gray-900 text-white p-3 rounded-xl mt-4 md:mt-auto'>
+                {movie.Type == "series" && <Button onClick={() => changeRoute(`details/${movie.imdbID}`)}>Ver episodios</Button>}
+                <div className="flex gap-1 mt-8 ">
+                    {movie.Genre && movie.Genre.split(", ").map((gen: string) => <Badge className='bg-gray-600 text-white hover:bg-gray-950'>{gen}</Badge>)}
+                </div>
+                <div className=' bg-gray-900 text-white p-3 rounded-xl mt-4 md:mt-8'>
                     <p><b>imdb Rating: </b>{movie.imdbRating}</p>
                     {movie.Ratings.map((rating) => {
                         return (
@@ -56,9 +77,7 @@ export default function ShowMovie({ movie }: Props) {
                             </div>
                         )
                     })}
-                </div>
-                <div className="flex gap-1 mt-8 ">
-                    {movie.Genre && movie.Genre.split(", ").map((gen: string) => <Badge className='bg-gray-600 text-white hover:bg-gray-950'>{gen}</Badge>)}
+
                 </div>
             </div>
 
@@ -66,7 +85,8 @@ export default function ShowMovie({ movie }: Props) {
     )
 
     async function LikeMovie() {
-        await fetch(`http://localhost:3333/movies`, {
+        setLiked(!liked)
+        await fetch(`${baseURL}/movies`, {
             method: "POST", body: JSON.stringify(movie), headers: {
                 "Content-Type": "application/json"
             }
@@ -74,7 +94,6 @@ export default function ShowMovie({ movie }: Props) {
             then(response => response.json()).
             then(async () => {
                 await liked ? setLiked(false) : setLiked(true)
-                !liked ? toast(`❤ ${movie.Title}`, { description: "Conteudo adicionado a sues favoritos" }) : toast(`🤍 ${movie.Title}`, { description: "Conteudo removido dos seus favoritos" })
 
             }).
             catch(() => {
@@ -82,9 +101,12 @@ export default function ShowMovie({ movie }: Props) {
             })
     }
     async function verifyMovieIsLiked() {
-        await fetch(`http://localhost:3333/movies/${movie.imdbID}`).then(response => response.json()).then(data => {
+        await fetch(`${baseURL}/movies/${movie.imdbID}`).then(response => response.json()).then(data => {
             data ? setLiked(true) : setLiked(false)
-
         })
+    }
+    function changeRoute(route: string) {
+
+        navigate(`/${route}`)
     }
 }

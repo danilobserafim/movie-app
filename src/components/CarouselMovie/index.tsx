@@ -1,15 +1,15 @@
 "use client"
 import React from 'react'
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../../components/ui/drawer'
+import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import {
     Carousel,
     CarouselContent,
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-} from '../../components/ui/carousel';
-import { movieDTO } from '../../pages/SearchPage/DTO';
+} from '../ui/carousel';
+import { movieDTO } from '../../DTOs/MovieDTO';
 import ShowMovie from '../ShowMovie';
 import { Button } from '../ui/button';
 
@@ -17,10 +17,11 @@ type props = {
     data: movieDTO[],
     // eslint-disable-next-line @typescript-eslint/ban-types
     onClose?: Function
+    title: string
 }
 
 
-export default function CarouselMovie({ data, onClose }: props) {
+export default function CarouselMovie({ data, onClose, title }: props) {
     return (
         <Carousel className=" w-[105%] ml-3  relative " opts={{
             align: "start",
@@ -29,7 +30,9 @@ export default function CarouselMovie({ data, onClose }: props) {
             slidesToScroll: 2,
         }}
         >
+          <h2 className='w-full pl-4 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 mt-8' >{title}</h2>
             <CarouselContent className=''>
+
                 {data.map((movie, index) => {
                     return (
                         <CarouselItem key={index}
@@ -38,12 +41,12 @@ export default function CarouselMovie({ data, onClose }: props) {
                                 <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl'>
                                         <img className='rounded-xl' src={movie.Poster} alt="Poster" />
                                 </DrawerTrigger>
-                                <DrawerContent className='bg-black border-red-950' onCloseAutoFocus={() => onClose && onClose()}>
-                                    <div className="w-full h-full bg-black text-white md:pb-14 flex flex-col items-center justify-center z-20 ">
+                                <DrawerContent className='bg-black border-red-950 h-full' onCloseAutoFocus={() => onClose && onClose()}>
+                                    <div className="w-full  bg-black text-white md:pb-14 z-20 ">
                                         <ShowMovie movie={movie} />
                                     </div>
-                                        <DrawerClose asChild className='absolute left-4 top-[100px] bg-gray-800 z-30 md:hidden hover:bg-black'>
-                                            <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-lg ' /></Button>
+                                        <DrawerClose asChild className='absolute left-4 top-[80px] md:flex hidden z-30  hover:bg-black'>
+                                            <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-xl ' /></Button>
                                         </DrawerClose>
                                 </DrawerContent>
                             </Drawer>
