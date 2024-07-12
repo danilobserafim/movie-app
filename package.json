@@ -10,7 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "depoly": "npm run build && gh-pages -D dist"
+    "depoly": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.7.0",
