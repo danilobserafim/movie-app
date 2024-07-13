@@ -37,7 +37,7 @@ export default function ShowMovie({ movie }: Props) {
     useEffect(() => {
         verifyMovieIsLiked()
     }, [movie])
-    return (<div className='md:flex'>
+    return (<>
         <motion.div variants={animate} initial="hidden" animate="visible"
             className=' w-[100%] mx-auto flex gap-8 relative flex-wrap z-40 p-4 text-white
                 md:mt-8 md:flex-nowrap  md:h-min md:overflow-hidden 
@@ -86,7 +86,7 @@ export default function ShowMovie({ movie }: Props) {
             </div>
         )
         }
-    </div>
+    </>
     )
 
     async function LikeMovie() {
