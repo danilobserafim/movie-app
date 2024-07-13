@@ -53,11 +53,7 @@ export default function AcordeonSeasons({ imdbID, totalSeasons }: props) {
     )
     async function getSeasons() {
         for (let index = 0; index < Number.parseInt(totalSeasons); index++) {
-            await fetch(`${VITE_API_OMDB_BASE_URL}/?i=${imdbID}&plot=full&apikey=${VITE_API_KEY}&season=${index + 1}`, {
-                method: "GET", headers: {
-                    "Content-type": "application/json",
-                }
-            }).
+            await fetch(`${VITE_API_OMDB_BASE_URL}/?i=${imdbID}&plot=full&apikey=${VITE_API_KEY}&season=${index + 1}`, { method: "GET" }).
                 then(response => response.json()).
                 then((data) => {
                     if (data) {

@@ -80,10 +80,13 @@ export default function ShowMovie({ movie }: Props) {
                 </div>
             </div>
         </motion.div>
+        {movie.Type == "series" && (
             <div className='w-full lg:w-[45%] lg:flex-wrap pt-10 md:h-[100vh] px-4 lg:mx-auto md:overflow-scroll'>
-                    {movie.Type == "series" && <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />}
-                </div>
-        </div>
+                <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />
+            </div>
+        )
+        }
+    </div>
     )
 
     async function LikeMovie() {
