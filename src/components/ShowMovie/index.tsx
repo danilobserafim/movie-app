@@ -37,9 +37,9 @@ export default function ShowMovie({ movie }: Props) {
     useEffect(() => {
         verifyMovieIsLiked()
     }, [movie])
-    return (
+    return (<div className='md:flex'>
         <motion.div variants={animate} initial="hidden" animate="visible"
-            className=' overflow-y-scroll h-[100vh] w-[100%] mx-auto flex gap-8 relative flex-wrap z-40 p-4 text-white
+            className=' w-[100%] mx-auto flex gap-8 relative flex-wrap z-40 p-4 text-white
                 md:mt-8 md:flex-nowrap  md:h-min md:overflow-hidden 
                 lg:w-[1000px]'
         >
@@ -64,7 +64,6 @@ export default function ShowMovie({ movie }: Props) {
                 <p><b>Duration: </b>{movie.Runtime}</p>
                 <p><b>Language: </b>{movie.Language}</p>
                 <p><b>Type: </b>{movie.Type}</p>
-                {movie.Type == "series" && <Button onClick={() => changeRoute(`details/${movie.imdbID}`)}>Ver episodios</Button>}
                 <div className="flex gap-1 mt-8 ">
                     {movie.Genre && movie.Genre.split(", ").map((gen: string) => <Badge className='bg-gray-600 text-white hover:bg-gray-950'>{gen}</Badge>)}
                 </div>
@@ -80,8 +79,11 @@ export default function ShowMovie({ movie }: Props) {
 
                 </div>
             </div>
-
         </motion.div>
+            <div className='w-full lg:w-[45%] lg:flex-wrap pt-10 md:h-[100vh] px-4 lg:mx-auto md:overflow-scroll'>
+                    {movie.Type == "series" && <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />}
+                </div>
+        </div>
     )
 
     async function LikeMovie() {

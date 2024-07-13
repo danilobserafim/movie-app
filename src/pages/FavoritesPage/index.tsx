@@ -10,6 +10,7 @@ export default function FavoritePage() {
   const [series, setSeries] = useState<movieDTO[]>([])
   const [docs, setDocs] = useState<movieDTO[]>([])
   const [bio, setBio] = useState<movieDTO[]>([])
+  const [episodes, setEpisodes] = useState<movieDTO[]>([])
   const [reload, setReload] = useState(false)
 
   useEffect(() => {
@@ -33,6 +34,9 @@ export default function FavoritePage() {
           {docs[0] && <CarouselMovie data={docs} onClose={() => setReload(!reload)} title='Docs'/>}
 
           {bio[0] && <CarouselMovie data={bio} onClose={() => setReload(!reload)} title='Biographies'/>}
+
+          {episodes[0] && <CarouselMovie data={episodes} onClose={() => setReload(!reload)} title='Episodes'/>}
+
       </div>
     </>
   )
@@ -54,6 +58,7 @@ export default function FavoritePage() {
       }))
       setDocs(data.filter((doc: movieDTO) => doc.Genre.split(", ").some((gen: string) => gen == "Documentary") && doc))
       setBio(data.filter((bio: movieDTO) => bio.Genre.split(", ").some((gen: string) => gen == "Biography") && bio))
+      setEpisodes(data.filter((episode: movieDTO) => episode.Type == "episode" && episode))
     })
   }
 

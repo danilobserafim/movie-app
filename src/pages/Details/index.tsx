@@ -13,19 +13,15 @@ export default function Details() {
     useEffect(() => {
         SearchMovieData()
     }, [dataSearch])
-
     return (
         <>
             <Header />
-            <div className="flex p-8">
-
+            <div className="py-8 xl:flex">
                 {movie && <ShowMovie movie={movie} />}
-            <div className='float-left w-[50%] mt-10'>
-                {movie && <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />}
+                <div className='w-full lg:w-[45%] lg:flex-wrap pt-10 md:h-[85vh] px-4 lg:mx-auto md:overflow-scroll'>
+                    {movie && <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />}
+                </div>
             </div>
-            </div>
-
-
         </>
     )
     async function SearchMovieData() {

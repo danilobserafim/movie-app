@@ -14,7 +14,6 @@ transition={{
 }}
 >
     <div className='w-[95%] h-[95%] bg-black rounded-3xl'>
-
     </div>
 </motion.div>
   )

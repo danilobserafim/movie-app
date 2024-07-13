@@ -36,13 +36,13 @@ export default function CarouselMovie({ data, onClose, title }: props) {
                 {data.map((movie, index) => {
                     return (
                         <CarouselItem key={index}
-                            className=" md:basis-1/4 lg:basis-1/6 basis-1/3">
+                            className=" md:basis-1/4 lg:basis-1/6 basis-1/3 justify-center items-center flex ">
                             <Drawer>
                                 <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl'>
                                         <img className='rounded-xl' src={movie.Poster} alt="Poster" />
                                 </DrawerTrigger>
                                 <DrawerContent className='bg-black border-red-950 h-full' onCloseAutoFocus={() => onClose && onClose()}>
-                                    <div className="w-full  bg-black text-white md:pb-14 z-20 ">
+                                    <div className="w-full  bg-black text-white md:pb-14 z-20 overflow-scroll">
                                         <ShowMovie movie={movie} />
                                     </div>
                                         <DrawerClose asChild className='absolute left-4 top-[80px] md:flex hidden z-30  hover:bg-black'>
