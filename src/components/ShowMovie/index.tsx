@@ -79,7 +79,7 @@ export default function ShowMovie({ movie }: Props) {
             </div>
         </motion.div>
         {movie.Type == "series" && (
-            <div className='w-full lg:w-[45%] lg:flex-wrap pt-10 md:h-[100vh] px-4 lg:mx-auto md:overflow-scroll'>
+            <div className='w-full pt-10 px-4 lg:mx-auto'>
                 <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />
             </div>
         )
