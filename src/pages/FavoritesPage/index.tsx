@@ -3,7 +3,7 @@ import Header from '../../components/Header'
 import { movieDTO } from '../../DTOs/MovieDTO'
 import CarouselMovie from '../../components/CarouselMovie';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const { VITE_API_BASE_URL } = import.meta.env
 
 export default function FavoritePage() {
   const [movies, setMovies] = useState<movieDTO[]>([])
@@ -27,31 +27,31 @@ export default function FavoritePage() {
 
       <div className='mx-auto  bg-black min-h-[100vh] overflow-hidden'>
 
-          {movies[0] &&<CarouselMovie data={movies} onClose={() => setReload(!reload)} title='Movies'/>}
+        {movies[0] && <CarouselMovie data={movies} onClose={() => setReload(!reload)} title='Movies' />}
 
-          {series[0] && <CarouselMovie data={series} onClose={() => setReload(!reload)} title='Series'/>}
+        {series[0] && <CarouselMovie data={series} onClose={() => setReload(!reload)} title='Series' />}
 
-          {docs[0] && <CarouselMovie data={docs} onClose={() => setReload(!reload)} title='Docs'/>}
+        {docs[0] && <CarouselMovie data={docs} onClose={() => setReload(!reload)} title='Docs' />}
 
-          {bio[0] && <CarouselMovie data={bio} onClose={() => setReload(!reload)} title='Biographies'/>}
+        {bio[0] && <CarouselMovie data={bio} onClose={() => setReload(!reload)} title='Biographies' />}
 
-          {episodes[0] && <CarouselMovie data={episodes} onClose={() => setReload(!reload)} title='Episodes'/>}
+        {episodes[0] && <CarouselMovie data={episodes} onClose={() => setReload(!reload)} title='Episodes' />}
 
       </div>
     </>
   )
   async function getFavoritesMovies() {
-    await fetch(`${baseURL}/movies`).then(response => response.json()).then(data => {
+    await fetch(`${VITE_API_BASE_URL}/movies`).then(response => response.json()).then(data => {
       setMovies(data.filter((movie: movieDTO) => {
-        if (movie.Type == "movie" 
-          && !movie.Genre.split(", ").some((gen: string) => gen == "Documentary") 
+        if (movie.Type == "movie"
+          && !movie.Genre.split(", ").some((gen: string) => gen == "Documentary")
           && !movie.Genre.split(", ").some((gen: string) => gen == "Biography")) {
           return movie
         }
       }))
       setSeries(data.filter((serie: movieDTO) => {
-        if (serie.Type == "series" 
-          && serie.Genre.split(", ").some((gen: string) => gen != "Documentary") 
+        if (serie.Type == "series"
+          && serie.Genre.split(", ").some((gen: string) => gen != "Documentary")
           && serie.Genre.split(", ").some((gen: string) => gen != "Biography")) {
           return serie
         }

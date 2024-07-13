@@ -4,7 +4,6 @@ import { Badge } from '../ui/badge'
 import { movieDTO } from '../../DTOs/MovieDTO'
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import AcordeonSeasons from '../AcordeonSeasons';
 
@@ -31,7 +30,6 @@ const animateLike = {
 
 
 export default function ShowMovie({ movie }: Props) {
-    const navigate = useNavigate()
 
     const [liked, setLiked] = useState(false)
     useEffect(() => {
@@ -47,10 +45,10 @@ export default function ShowMovie({ movie }: Props) {
             <div className='sm:px-8 '>
                 <div className='flex justify-between items-center  mb-4 mt-[-8px]'>
                     <h1 className='text-2xl font-bold'>{movie.Title}</h1>
-                    <Button onClick={LikeMovie} variant={'ghost'} className='active:scale-90  text-2xl z-20'>{liked ?
+                    {movie.Type !== "episode" &&<Button onClick={LikeMovie} variant={'ghost'} className='active:scale-90  text-2xl z-20'>{liked ?
                         (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle className='text-green-500' /></motion.div>) :
                         (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle /></motion.div>)}
-                    </Button>
+                    </Button>}
                 </div>
                 <p className='text-gray-500 font-semibold text-md'>
                     {movie.Plot}
@@ -102,6 +100,7 @@ export default function ShowMovie({ movie }: Props) {
 
             }).
             catch(() => {
+                setLiked(!liked)
                 toast("Algo deu errado", { description: "Verifique sua conexão" });
             })
     }
@@ -109,9 +108,5 @@ export default function ShowMovie({ movie }: Props) {
         await fetch(`${baseURL}/movies/${movie.imdbID}`).then(response => response.json()).then(data => {
             data ? setLiked(true) : setLiked(false)
         })
-    }
-    function changeRoute(route: string) {
-
-        navigate(`/${route}`)
     }
 }
