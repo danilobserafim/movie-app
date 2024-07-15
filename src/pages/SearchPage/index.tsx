@@ -21,7 +21,7 @@ export default function SearchPage() {
     return (
         <div className='pb-16 text-white min-h-[100vh]'>
             <Header />
-            {isLoading && <div className='flex justify-center h-[80vh] items-center'><Spinner /></div>}
+            {isLoading && <div className='flex justify-center h-[80vh] items-center'><Spinner className="w-20" /></div>}
             {!movie && !isLoading && (<div>
                     <h1 className='text-3xl mt-10 text-center'>Titulo não encontrado</h1>
                     <p className='text-xl  text-center'>Verifique sua busca</p>

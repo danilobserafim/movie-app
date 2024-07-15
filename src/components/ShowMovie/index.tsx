@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import AcordeonSeasons from '../AcordeonSeasons';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL
+const { VITE_API_BASE_URL } = import.meta.env
 
 type Props = {
     movie: movieDTO
@@ -15,17 +15,11 @@ type Props = {
 
 const animate = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-        y: 0,
-        opacity: 1
-    }
+    visible: { y: 0, opacity: 1 }
 }
 const animateLike = {
     hidden: { opacity: 0 },
-    visible: {
-
-        opacity: 1
-    }
+    visible: { opacity: 1 }
 }
 
 
@@ -45,7 +39,7 @@ export default function ShowMovie({ movie }: Props) {
             <div className='sm:px-8 '>
                 <div className='flex justify-between items-center  mb-4 mt-[-8px]'>
                     <h1 className='text-2xl font-bold'>{movie.Title}</h1>
-                    {movie.Type !== "episode" &&<Button onClick={LikeMovie} variant={'ghost'} className='active:scale-90  text-2xl z-20'>{liked ?
+                    {movie.Type !== "episode" && <Button onClick={LikeMovie} variant={'ghost'} className='active:scale-90  text-2xl z-20'>{liked ?
                         (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle className='text-green-500' /></motion.div>) :
                         (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle /></motion.div>)}
                     </Button>}
@@ -89,7 +83,7 @@ export default function ShowMovie({ movie }: Props) {
 
     async function LikeMovie() {
         setLiked(!liked)
-        await fetch(`${baseURL}/movies`, {
+        await fetch(`${VITE_API_BASE_URL}/movies`, {
             method: "POST", body: JSON.stringify(movie), headers: {
                 "Content-Type": "application/json"
             }
@@ -105,7 +99,7 @@ export default function ShowMovie({ movie }: Props) {
             })
     }
     async function verifyMovieIsLiked() {
-        await fetch(`${baseURL}/movies/${movie.imdbID}`).then(response => response.json()).then(data => {
+        await fetch(`${VITE_API_BASE_URL}/movies/${movie.imdbID}`).then(response => response.json()).then(data => {
             data ? setLiked(true) : setLiked(false)
         })
     }

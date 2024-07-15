@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
+import { motion } from 'framer-motion'
 import { SeasonDTO } from '../../DTOs/SeasonDTO'
 import DrawerEpisode from '../DrawerEpisode'
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel'
+import Spinner from '../Spinner'
 
 
 type props = {
@@ -20,48 +22,53 @@ export default function AcordeonSeasons({ imdbID, totalSeasons }: props) {
 
     return (
         <>
-            {seasonsData.map((seasonData, index) => {
+            {(!seasonsData[0] && totalSeasons !== "N/A") && <> <h1 className='w-full text-center mb-10'>Carregando temporadas</h1><Spinner className='w-20 mx-auto' /></>}
+            {seasonsData && seasonsData.map((seasonData, index) => {
                 return (
-                    <Accordion type="multiple" className="text-white max-w-[1000px] mx-auto flex-col" key={index}>
-                        <AccordionItem value={`item-${index}`}>
-                            <AccordionTrigger className=''>{index + 1}ª temporada</AccordionTrigger>
-                            <AccordionContent>
-                                <Carousel className='' opts={{
-                                    align: "start",
-                                    loop: true,
-                                    watchSlides: true,
-                                    slidesToScroll: 2,
-                                }}>
-                                    <CarouselContent>
-                                        {seasonData?.Episodes.map((episode, i) => {
-                                            return (
-                                                <CarouselItem key={i}
-                                                    className=" md:basis-1/4 basis-1/3 justify-center items-center flex">
-                                                    <DrawerEpisode imdbID={episode.imdbID} />
-                                                </CarouselItem>
-                                            )
+                    <motion.div animate={{y:0}} initial={{y:20}} >
+                        <Accordion type="multiple" className="text-white max-w-[1000px] mx-auto flex-col" key={index}>
+                            <AccordionItem value={`item-${index}`}>
+                                <AccordionTrigger className=''>{index + 1}ª temporada</AccordionTrigger>
+                                <AccordionContent>
+                                    <Carousel className='' opts={{
+                                        align: "start",
+                                        loop: true,
+                                        watchSlides: true,
+                                        slidesToScroll: 2,
+                                    }}>
+                                        <CarouselContent>
+                                            {seasonData?.Episodes.map((episode, i) => {
+                                                return (
+                                                    <CarouselItem key={i}
+                                                        className=" md:basis-1/4 basis-1/3 justify-center items-center flex">
+                                                        <DrawerEpisode imdbID={episode.imdbID} />
+                                                    </CarouselItem>
+                                                )
 
-                                        })}
-                                    </CarouselContent>
-                                </Carousel>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+                                            })}
+                                        </CarouselContent>
+                                    </Carousel>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </motion.div>
                 )
             })}
         </>
     )
     async function getSeasons() {
+        let dataMovie: SeasonDTO[] = []
         for (let index = 0; index < Number.parseInt(totalSeasons); index++) {
             await fetch(`${VITE_API_OMDB_BASE_URL}/?i=${imdbID}&plot=full&apikey=${VITE_API_KEY}&season=${index + 1}`, { method: "GET" }).
                 then(response => response.json()).
                 then((data) => {
                     if (data) {
-                        setSeasonsData(prev => [...prev, data])
+                        dataMovie.push(data)
                     }
                 }).
                 catch(() => console.log(`Erro na busca da ª temporada!`))
         }
+        setSeasonsData(dataMovie)
     }
 
 }

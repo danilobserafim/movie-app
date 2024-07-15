@@ -4,16 +4,17 @@ import ShowMovie from '../ShowMovie'
 import { Button } from '../ui/button'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { movieDTO } from '../../DTOs/MovieDTO'
-import {delay, motion} from 'framer-motion'
+import { delay, motion } from 'framer-motion'
 import { Skeleton } from '../ui/skeleton'
 
 
 const animate = {
-  hidden:{opacity: 0},
-  visible:{
-    opacity:1,
-    transition:{
-      delay:0.3
+  hidden: { opacity: 0, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale:1,
+    transition: {
+      delay: 0.3
     }
   },
 
@@ -34,15 +35,20 @@ export default function DrawerEpisode({ imdbID }: props) {
   return (
     <Drawer>
       {!isLoading && (
-        <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl'>
-          <motion.img variants={animate} initial="hidden" animate="visible" className='rounded-xl max-h-[200px]' src={episode.Poster} alt="Poster" />
-
-        </DrawerTrigger>
+        <>
+          <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl'>
+            <div className='flex flex-col h-[100%] justify-around w-[100%] items-center'>
+              <motion.img variants={animate} initial="hidden" animate="visible" className='rounded-t-xl max-h-[200px] h-auto w-auto' src={episode.Poster} alt="Poster" />
+              <div>
+                <h1 className='w-full text-center p-0 mt-2'>E{episode.Episode} - {episode.Title}</h1>
+                <p className='w-full text-center p-0 m-0'>  {`Duration: ${episode.Runtime}`}</p>
+              </div>
+            </div>
+          </DrawerTrigger>
+        </>
       )}
       {isLoading && (
-        <DrawerTrigger disabled asChild className='rounded-xl'>
-          <Skeleton className='h-20 md:h-36 w-[200px] bg-gray-500' />
-        </DrawerTrigger>
+        <Skeleton className='h-20 md:h-36 w-[200px] bg-gray-500 rounded-xl' />
       )
       }
       <DrawerContent className='bg-black border-red-950 h-full'>
