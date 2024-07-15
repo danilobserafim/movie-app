@@ -22,7 +22,7 @@ export default function AcordeonSeasons({ imdbID, totalSeasons }: props) {
 
     return (
         <>
-            {(!seasonsData[0] && totalSeasons !== "N/A") && <> <h1 className='w-full text-center mb-10'>Carregando temporadas</h1><Spinner className='w-20 mx-auto' /></>}
+            {(!seasonsData[0] && totalSeasons !== "N/A") && <div className='mb-10'> <h1 className='w-full text-center mb-10'>Carregando temporadas</h1><Spinner className='w-10 md:w-20 mx-auto' /></div>}
             {seasonsData && seasonsData.map((seasonData, index) => {
                 return (
                     <motion.div animate={{ y: 0 }} initial={{ y: 20 }} >
