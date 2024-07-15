@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import ShowMovie from '../ShowMovie'
 import { Button } from '../ui/button'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai'
 import { movieDTO } from '../../DTOs/MovieDTO'
 import { delay, motion } from 'framer-motion'
 import { Skeleton } from '../ui/skeleton'
@@ -59,8 +59,8 @@ export default function DrawerEpisode({ imdbID }: props) {
         <div className="w-full  bg-black text-white md:pb-14 z-20 overflow-scroll">
           <ShowMovie movie={episode} />
         </div>
-        <DrawerClose asChild className='absolute left-4 top-[80px] border-none flex z-30 bg-gray-600 md:bg-black hover:bg-black md:hidden'>
-          <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-xl drop-shadow-3xl drop-shadow ' /></Button>
+        <DrawerClose asChild className='absolute right-4 top-4 border-none flex z-30  hover:bg-red-600'>
+          <Button variant="outline" ><AiOutlineClose className='text-white text-xl drop-shadow-3xl drop-shadow ' /></Button>
         </DrawerClose>
       </DrawerContent>
     </Drawer>

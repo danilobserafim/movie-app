@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineArrowLeft, AiOutlineClose } from "react-icons/ai";
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import {
     Carousel,
@@ -20,6 +20,25 @@ type props = {
     title: string
 }
 
+const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+  
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
 
 export default function CarouselMovie({ data, onClose, title }: props) {
     return (
@@ -45,8 +64,8 @@ export default function CarouselMovie({ data, onClose, title }: props) {
                                     <div className="w-full text-white md:pb-14 z-20 overflow-scroll max-h-[100vh]">
                                         <ShowMovie movie={movie} />
                                     </div>
-                                    <DrawerClose asChild className={`absolute left-4 top-[80px] bg-gray-600 md:bg-black z-30 hover:bg-black ${movie.Type !== "series" && "md:hidden"}`}>
-                                        <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-xl ' /></Button>
+                                    <DrawerClose asChild className={`absolute right-4 top-4  z-30 hover:bg-red-600 border-none `}>
+                                        <Button variant="outline" ><AiOutlineClose className='text-white text-xl ' /></Button>
                                     </DrawerClose>
                                 </DrawerContent>
                             </Drawer>
