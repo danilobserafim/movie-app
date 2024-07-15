@@ -36,7 +36,7 @@ export default function DrawerEpisode({ imdbID }: props) {
     <Drawer>
       {!isLoading && (
         <>
-          <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl'>
+          <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 h-full transition-all  rounded-xl'>
             <div className='flex flex-col h-[100%] justify-around w-[100%] items-center'>
               <motion.img variants={animate} initial="hidden" animate="visible" className='rounded-t-xl max-h-[200px] h-auto w-auto' src={episode.Poster} alt="Poster" />
               <div>
@@ -48,7 +48,11 @@ export default function DrawerEpisode({ imdbID }: props) {
         </>
       )}
       {isLoading && (
-        <Skeleton className='h-20 md:h-36 w-[200px] bg-gray-500 rounded-xl' />
+        <div className='block'>
+          <Skeleton className='h-20 md:h-36 w-[200px] bg-gray-500 rounded-xl' />
+          <Skeleton className='h-3 mt-1 w-[180px] mx-auto bg-gray-500 rounded-xl' />
+          <Skeleton className='h-3 mt-1  w-[200px] mx-auto bg-gray-500 rounded-xl' />
+        </div>
       )
       }
       <DrawerContent className='bg-black border-red-950 h-full'>

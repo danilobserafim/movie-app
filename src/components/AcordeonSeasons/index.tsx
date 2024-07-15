@@ -26,7 +26,7 @@ export default function AcordeonSeasons({ imdbID, totalSeasons }: props) {
             {seasonsData && seasonsData.map((seasonData, index) => {
                 return (
                     <motion.div animate={{y:0}} initial={{y:20}} >
-                        <Accordion type="multiple" className="text-white max-w-[1000px] mx-auto flex-col" key={index}>
+                        <Accordion type="multiple" className="text-white max-w-[1000px] mx-auto " key={index}>
                             <AccordionItem value={`item-${index}`}>
                                 <AccordionTrigger className=''>{index + 1}ª temporada</AccordionTrigger>
                                 <AccordionContent>
