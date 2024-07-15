@@ -25,12 +25,12 @@ export default function AcordeonSeasons({ imdbID, totalSeasons }: props) {
             {(!seasonsData[0] && totalSeasons !== "N/A") && <> <h1 className='w-full text-center mb-10'>Carregando temporadas</h1><Spinner className='w-20 mx-auto' /></>}
             {seasonsData && seasonsData.map((seasonData, index) => {
                 return (
-                    <motion.div animate={{y:0}} initial={{y:20}} >
-                        <Accordion type="multiple" className="text-white max-w-[1000px] mx-auto " key={index}>
+                    <motion.div animate={{ y: 0 }} initial={{ y: 20 }} >
+                        <Accordion type="multiple" className="text-white max-w-[1200px] mx-auto" key={index}>
                             <AccordionItem value={`item-${index}`}>
                                 <AccordionTrigger className=''>{index + 1}ª temporada</AccordionTrigger>
                                 <AccordionContent>
-                                    <Carousel className='' opts={{
+                                    <Carousel className='w-[110%]' opts={{
                                         align: "start",
                                         loop: true,
                                         watchSlides: true,
@@ -40,7 +40,7 @@ export default function AcordeonSeasons({ imdbID, totalSeasons }: props) {
                                             {seasonData?.Episodes.map((episode, i) => {
                                                 return (
                                                     <CarouselItem key={i}
-                                                        className=" md:basis-1/4 basis-1/3 justify-center items-center flex">
+                                                        className=" md:basis-1/6 basis-1/3 justify-center items-center flex">
                                                         <DrawerEpisode imdbID={episode.imdbID} />
                                                     </CarouselItem>
                                                 )

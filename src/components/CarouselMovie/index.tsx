@@ -30,7 +30,7 @@ export default function CarouselMovie({ data, onClose, title }: props) {
             slidesToScroll: 2,
         }}
         >
-          <h2 className='w-full pl-4 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 mt-8' >{title}</h2>
+            <h2 className='w-full pl-4 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 mt-8' >{title}</h2>
             <CarouselContent className=''>
 
                 {data.map((movie, index) => {
@@ -39,15 +39,15 @@ export default function CarouselMovie({ data, onClose, title }: props) {
                             className=" md:basis-1/4 lg:basis-1/6 basis-1/3 justify-center items-center flex ">
                             <Drawer>
                                 <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl'>
-                                        <img className='rounded-xl' src={movie.Poster} alt="Poster" />
+                                    <img className='rounded-xl' src={movie.Poster} alt="Poster" />
                                 </DrawerTrigger>
-                                <DrawerContent className='bg-black border-red-950 h-full' onCloseAutoFocus={() => onClose && onClose()}>
-                                    <div className="w-full  bg-black text-white md:pb-14 z-20 overflow-scroll">
+                                <DrawerContent className='bg-black border-red-950 h-full md:h-auto max-h-[100vh]' onCloseAutoFocus={() => onClose && onClose()}>
+                                    <div className="w-full text-white md:pb-14 z-20 overflow-scroll max-h-[100vh]">
                                         <ShowMovie movie={movie} />
                                     </div>
-                                        <DrawerClose asChild className='absolute left-4 top-[80px] md:flex hidden z-30  hover:bg-black'>
-                                            <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-xl ' /></Button>
-                                        </DrawerClose>
+                                    <DrawerClose asChild className={`absolute left-4 top-[80px] bg-gray-600 md:bg-black z-30 hover:bg-black ${movie.Type !== "series" && "md:hidden"}`}>
+                                        <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-xl ' /></Button>
+                                    </DrawerClose>
                                 </DrawerContent>
                             </Drawer>
                         </CarouselItem>

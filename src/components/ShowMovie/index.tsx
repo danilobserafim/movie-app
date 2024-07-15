@@ -32,7 +32,7 @@ export default function ShowMovie({ movie }: Props) {
     return (<>
         <motion.div variants={animate} initial="hidden" animate="visible"
             className=' w-[100%] mx-auto flex gap-8 relative flex-wrap z-40 p-4 text-white
-                md:mt-8 md:flex-nowrap  md:h-min md:overflow-hidden 
+                md:mt-8 md:flex-nowrap  md:h-min 
                 lg:w-[1000px]'
         >
             <img src={movie.Poster} alt="" className='w-[100vw] z-10 md:h-[100%] md:w-auto' />

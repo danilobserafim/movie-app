@@ -12,7 +12,7 @@ const animate = {
   hidden: { opacity: 0, scale: 0 },
   visible: {
     opacity: 1,
-    scale:1,
+    scale: 1,
     transition: {
       delay: 0.3
     }
@@ -49,18 +49,18 @@ export default function DrawerEpisode({ imdbID }: props) {
       )}
       {isLoading && (
         <div className='block'>
-          <Skeleton className='h-20 md:h-36 w-[200px] bg-gray-500 rounded-xl' />
-          <Skeleton className='h-3 mt-1 w-[180px] mx-auto bg-gray-500 rounded-xl' />
-          <Skeleton className='h-3 mt-1  w-[200px] mx-auto bg-gray-500 rounded-xl' />
+          <Skeleton className='h-20 md:h-36 w-32 md:w-[200px] bg-gray-500 rounded-xl' />
+          <Skeleton className='h-3 mt-1 md:w-[180px] mx-auto bg-gray-500 rounded-xl' />
+          <Skeleton className='h-3 mt-1 md:w-[200px] mx-auto bg-gray-500 rounded-xl' />
         </div>
       )
       }
-      <DrawerContent className='bg-black border-red-950 h-full'>
+      <DrawerContent className='bg-black border-red-950'>
         <div className="w-full  bg-black text-white md:pb-14 z-20 overflow-scroll">
           <ShowMovie movie={episode} />
         </div>
-        <DrawerClose asChild className='absolute left-4 top-[80px] md:flex hidden z-30  hover:bg-black'>
-          <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-xl ' /></Button>
+        <DrawerClose asChild className='absolute left-4 top-[80px] border-none flex z-30 bg-gray-600 md:bg-black hover:bg-black md:hidden'>
+          <Button variant="outline" ><AiOutlineArrowLeft className='text-white text-xl drop-shadow-3xl drop-shadow ' /></Button>
         </DrawerClose>
       </DrawerContent>
     </Drawer>
