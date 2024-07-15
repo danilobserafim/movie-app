@@ -55,7 +55,7 @@ export default function DrawerEpisode({ imdbID }: props) {
         </div>
       )
       }
-      <DrawerContent className='bg-black border-red-950'>
+      <DrawerContent className='bg-black border-red-950 max-h-[100vh]'>
         <div className="w-full  bg-black text-white md:pb-14 z-20 overflow-scroll">
           <ShowMovie movie={episode} />
         </div>
