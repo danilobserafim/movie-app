@@ -22,7 +22,7 @@ export default function DrawerMovie({ movie, onCloseDrawer }: props) {
                 }}} initial={{x:10, opacity:0}} className='rounded-xl' src={movie.Poster} alt="Poster" />
             </DrawerTrigger>
 
-            <DrawerContent className='bg-black border-red-950 h-full md:h-auto max-h-[100vh]' onCloseAutoFocus={() => onCloseDrawer && onCloseDrawer()}>
+            <DrawerContent className='bg-black border-none h-full md:h-auto max-h-[100vh]' onCloseAutoFocus={() => onCloseDrawer && onCloseDrawer()}>
 
                 <div className="w-full text-white md:pb-14 z-20 overflow-scroll max-h-[100vh]">
                     <ShowMovie movie={movie} />
