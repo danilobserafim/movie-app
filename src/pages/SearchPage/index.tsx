@@ -4,6 +4,7 @@ import ShowMovie from '../../components/ShowMovie'
 import Header from '../../components/Header'
 import { useParams } from 'react-router-dom'
 import Spinner from '../../components/Spinner';
+import Footer from '../../components/Footer'
 
 export default function SearchPage() {
     const [movie, setMovie] = useState<movieDTO | null>()
@@ -27,6 +28,7 @@ export default function SearchPage() {
                     <p className='text-xl  text-center'>Verifique sua busca</p>
                 </div>)}
                 {movie && !isLoading && (<ShowMovie movie={movie} />)}
+                <Footer />
         </div>
     )
 

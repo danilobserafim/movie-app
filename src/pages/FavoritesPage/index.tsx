@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import { movieDTO } from '../../DTOs/MovieDTO'
 import CarouselMovie from '../../components/CarouselMovie';
+import Footer from '../../components/Footer';
+import Spinner from '../../components/Spinner';
 
 const { VITE_API_BASE_URL } = import.meta.env
 
@@ -12,6 +14,7 @@ export default function FavoritePage() {
   const [bio, setBio] = useState<movieDTO[]>([])
   const [episodes, setEpisodes] = useState<movieDTO[]>([])
   const [reload, setReload] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getFavoritesMovies()
@@ -25,23 +28,30 @@ export default function FavoritePage() {
     <>
       <Header />
 
-      <div className='mx-auto  bg-black min-h-[100vh] overflow-hidden'>
+      {!isLoading && <div className='h-[100vh] flex justify-center items-center'>
+        <Spinner className='w-24' />
+      </div>}
 
-        {movies[0] && <CarouselMovie data={movies} onClose={() => setReload(!reload)} title='Movies' />}
+      {isLoading && <div className='mx-auto  bg-black min-h-[100vh] overflow-hidden'>
 
-        {series[0] && <CarouselMovie data={series} onClose={() => setReload(!reload)} title='Series' />}
+        {movies[0] && <CarouselMovie data={movies} onCloseDrwaer={() => setReload(!reload)} title='Movies' />}
 
-        {docs[0] && <CarouselMovie data={docs} onClose={() => setReload(!reload)} title='Docs' />}
+        {series[0] && <CarouselMovie data={series} onCloseDrwaer={() => setReload(!reload)} title='Series' />}
 
-        {bio[0] && <CarouselMovie data={bio} onClose={() => setReload(!reload)} title='Biographies' />}
+        {docs[0] && <CarouselMovie data={docs} onCloseDrwaer={() => setReload(!reload)} title='Docs' />}
 
-        {episodes[0] && <CarouselMovie data={episodes} onClose={() => setReload(!reload)} title='Episodes' />}
+        {bio[0] && <CarouselMovie data={bio} onCloseDrwaer={() => setReload(!reload)} title='Biographies' />}
 
-      </div>
+        {episodes[0] && <CarouselMovie data={episodes} onCloseDrwaer={() => setReload(!reload)} title='Episodes' />}
+
+      </div>}
+      <Footer />
     </>
+
   )
   async function getFavoritesMovies() {
     await fetch(`${VITE_API_BASE_URL}/movies`).then(response => response.json()).then(data => {
+      setIsLoading(true)
       setMovies(data.filter((movie: movieDTO) => {
         if (movie.Type == "movie"
           && !movie.Genre.split(", ").some((gen: string) => gen == "Documentary")
