@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import ShowMovie from '../ShowMovie'
 import { Button } from '../ui/button'
-import {  AiOutlineClose } from 'react-icons/ai'
+import { AiFillStar, AiOutlineClose } from 'react-icons/ai'
 import { movieDTO } from '../../DTOs/MovieDTO'
-import {  motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Skeleton } from '../ui/skeleton'
 
 
@@ -38,6 +38,12 @@ export default function DrawerEpisode({ imdbID }: props) {
         <>
           <DrawerTrigger asChild className='cursor-pointer scale-95 hover:scale-100 h-full transition-all  rounded-xl'>
             <div className='flex flex-col h-[100%] justify-around w-[100%] items-center'>
+              <div className='flex items-center gap-2 absolute -left-1 top-0 bg-black bg-opacity-75 p-1 rounded-xl md:p-2 '>
+                <AiFillStar className='text-yellow-500 text-lg' />
+                <p className=''>
+                  {episode.imdbRating}
+                </p>
+              </div>
               <motion.img variants={animate} initial="hidden" animate="visible" className='rounded-t-xl max-h-[200px] h-auto w-auto' src={episode.Poster} alt="Poster" />
               <div>
                 <h1 className='w-full text-center p-0 mt-2'>E{episode.Episode} - {episode.Title}</h1>

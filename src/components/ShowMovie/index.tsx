@@ -35,7 +35,7 @@ export default function ShowMovie({ movie }: Props) {
                 md:mt-8 md:flex-nowrap  md:h-min 
                 lg:w-[1000px]'
         >
-            <img src={movie.Poster} alt="" className='w-[100vw] z-10 md:h-[100%] md:w-auto' />
+            <img src={movie.Poster} alt="" className='w-[100vw] z-10 md:h-[100%] md:w-auto pointer-events-none' />
             <div className='sm:px-8 '>
                 <div className='flex justify-between items-center  mb-4 mt-[-8px]'>
                     <h1 className='text-2xl font-bold'>{movie.Title}</h1>
