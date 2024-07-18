@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import { motion } from "framer-motion";
 import ShowMovie from '../ShowMovie'

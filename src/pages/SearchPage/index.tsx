@@ -28,7 +28,6 @@ export default function SearchPage() {
                     <p className='text-xl  text-center'>Verifique sua busca</p>
                 </div>)}
                 {movie && !isLoading && (<ShowMovie movie={movie} />)}
-                <Footer />
         </div>
     )
 

@@ -45,7 +45,6 @@ export default function FavoritePage() {
         {episodes[0] && <CarouselMovie data={episodes} onCloseDrwaer={() => setReload(!reload)} title='Episodes' />}
 
       </div>}
-      <Footer />
     </>
 
   )

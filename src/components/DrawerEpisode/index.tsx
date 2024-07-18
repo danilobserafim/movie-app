@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import ShowMovie from '../ShowMovie'
 import { Button } from '../ui/button'
-import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai'
+import {  AiOutlineClose } from 'react-icons/ai'
 import { movieDTO } from '../../DTOs/MovieDTO'
-import { delay, motion } from 'framer-motion'
+import {  motion } from 'framer-motion'
 import { Skeleton } from '../ui/skeleton'
 
 

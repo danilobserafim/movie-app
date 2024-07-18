@@ -1,5 +1,3 @@
-import { AiOutlineClose } from "react-icons/ai";
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import {
     Carousel,
     CarouselContent,
@@ -40,7 +38,7 @@ export default function CarouselMovie({ data, onCloseDrwaer, title }: props) {
 
                 })}
             </CarouselContent>
-            <div className='absolute -top-7 right-[10%] '>
+            <div className='absolute top-5 right-[10%] '>
                 <CarouselNext className="text-white hover:text-white hidden md:flex border-none" />
                 <CarouselPrevious className="text-white hover:text-white hidden md:flex border-none" />
 
