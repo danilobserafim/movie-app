@@ -4,6 +4,7 @@ import Header from '../../components/Header'
 import ShowMovie from '../../components/ShowMovie'
 import AcordeonSeasons from '../../components/AcordeonSeasons'
 import { movieDTO } from '../../DTOs/MovieDTO'
+import Spinner from '../../components/Spinner'
 
 export default function Details() {
     const [movie, setMovie] = useState<movieDTO | any>()
@@ -16,12 +17,19 @@ export default function Details() {
     return (
         <>
             <Header />
-            <div className="py-8 xl:flex">
-                {movie && <ShowMovie movie={movie} />}
-                <div className='w-full lg:w-[45%] lg:flex-wrap pt-10 md:h-[85vh] px-4 lg:mx-auto md:overflow-scroll'>
-                    {movie && <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />}
+            {
+                movie ? <div className="py-8">
+                    <ShowMovie movie={movie} />
+                    {
+                        movie.TotalSeasons && <div className='w-full lg:w-[45%] lg:flex-wrap pt-10 md:h-[85vh] px-4 lg:mx-auto md:overflow-scroll'>
+                            <AcordeonSeasons imdbID={movie.imdbID} totalSeasons={movie.totalSeasons} />
+                        </div>
+                    }
+                </div> : <div className='h-96 flex justify-center items-center'>
+                    <Spinner className='h-10' />
+
                 </div>
-            </div>
+            }
         </>
     )
     async function SearchMovieData() {

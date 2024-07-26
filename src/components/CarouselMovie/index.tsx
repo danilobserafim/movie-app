@@ -22,7 +22,7 @@ export default function CarouselMovie({ data, onCloseDrwaer, title }: props) {
             align: "start",
             loop: true,
             watchSlides: true,
-            slidesToScroll: 2,
+            slidesToScroll: 1,
         }}
         >
             <h2 className='w-full pl-1 md:text-5xl text-xl font-bold md:mt-20 text-white md:pl-5 md:my-8 mt-5 mb-1' >{title}</h2>

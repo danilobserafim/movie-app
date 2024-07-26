@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import { movieDTO } from '../../DTOs/MovieDTO'
 import CarouselMovie from '../../components/CarouselMovie';
-import Footer from '../../components/Footer';
 import Spinner from '../../components/Spinner';
 
 const { VITE_API_BASE_URL } = import.meta.env
