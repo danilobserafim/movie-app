@@ -13,16 +13,16 @@ import Details from './pages/Details';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <FavoritePage />,
-  },
-  {
     path: "/search/:dataSearch",
     element: <SearchPage />,
   },
   {
     path: "/details/:dataSearch",
     element: <Details />,
+  },
+  {
+    path: "/",
+    element: <FavoritePage />,
   },
 ]);
 

@@ -32,7 +32,7 @@ export default function CarouselMovie({ data, onCloseDrwaer, title }: props) {
                     return (
                         <CarouselItem key={index}
                             className=" md:basis-1/4 lg:basis-1/6 basis-1/3 justify-center items-center flex ">
-                            <DrawerMovie movie={movie} onCloseDrawer={()=>onCloseDrwaer && onCloseDrwaer()}/>
+                            <DrawerMovie movie={movie} />
                         </CarouselItem>
                     )
 

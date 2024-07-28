@@ -1,16 +1,12 @@
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '../ui/drawer'
 import { motion } from "framer-motion";
-import ShowMovie from '../ShowMovie'
-import { Button } from '../ui/button'
-import { AiFillStar, AiOutlineClose } from 'react-icons/ai'
+import { AiFillStar } from 'react-icons/ai'
 import { movieDTO } from '../../DTOs/MovieDTO'
-
 
 type props = {
     movie: movieDTO,
-    onCloseDrawer: Function
 }
-export default function DrawerMovie({ movie, onCloseDrawer }: props) {
+
+export default function DrawerMovie({ movie }: props) {
     return (
         <a href={`/details/${movie.imdbID}`}>
             <div className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl select-none ' >
