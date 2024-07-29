@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
 import { AiFillStar } from 'react-icons/ai'
 import { movieDTO } from '../../DTOs/MovieDTO'
+import { useNavigate } from "react-router-dom";
 
 type props = {
     movie: movieDTO,
 }
 
 export default function DrawerMovie({ movie }: props) {
+  const navigate = useNavigate()
+
     return (
-        <a href={`/details/${movie.imdbID}`}>
+        <button onClick={() => changeRoute(`details/${movie.imdbID}`)}>
             <div className='cursor-pointer scale-95 hover:scale-100 transition-all  rounded-xl select-none ' >
                 <div className='relative text-white flex flex-col justify-between'>
                     <div className='flex items-center gap-2 absolute -left-1 top-0 bg-black bg-opacity-75 p-1 rounded-xl md:p-2 '>
@@ -27,6 +30,10 @@ export default function DrawerMovie({ movie }: props) {
                 </div>
 
             </div>
-        </a>
+        </button>
     )
+    function changeRoute(route: string) {
+
+        navigate(`/${route}`)
+      }
 }
