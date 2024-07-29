@@ -6,7 +6,7 @@ import {
     CarouselPrevious,
 } from '../ui/carousel';
 import { movieDTO } from '../../DTOs/MovieDTO';
-import DrawerMovie from "../DrwaeMovie";
+import CardMovie from "../CardMovie";
 
 type props = {
     data: movieDTO[],
@@ -16,7 +16,7 @@ type props = {
 }
 
 
-export default function CarouselMovie({ data, onCloseDrwaer, title }: props) {
+export default function CarouselMovie({ data, title }: props) {
     return (
         <Carousel className=" w-[105%] ml-3  relative transition-transform" opts={{
             align: "start",
@@ -32,7 +32,7 @@ export default function CarouselMovie({ data, onCloseDrwaer, title }: props) {
                     return (
                         <CarouselItem key={index}
                             className=" md:basis-1/4 lg:basis-1/6 basis-1/3 justify-center items-center flex ">
-                            <DrawerMovie movie={movie} />
+                            <CardMovie movie={movie} />
                         </CarouselItem>
                     )
 

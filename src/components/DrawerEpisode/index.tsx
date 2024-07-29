@@ -61,11 +61,11 @@ export default function DrawerEpisode({ imdbID }: props) {
         </div>
       )
       }
-      <DrawerContent className='bg-black border-red-900 max-h-[80vh]'>
+      <DrawerContent className='bg-black border-gray-900 max-h-[80vh]'>
         <div className="w-full h-full bg-black text-white md:pb-14 z-20 overflow-scroll">
           <ShowMovie movie={episode} />
         </div>
-        <DrawerClose asChild className='absolute right-4 top-4 border-none flex z-30  hover:bg-red-600'>
+        <DrawerClose asChild className='absolute right-4 top-4 border-none flex z-30  hover:bg-red-600 '>
           <Button variant="outline" ><AiOutlineClose className='text-white text-xl drop-shadow-3xl drop-shadow ' /></Button>
         </DrawerClose>
       </DrawerContent>

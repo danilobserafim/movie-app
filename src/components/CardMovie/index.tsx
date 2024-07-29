@@ -7,7 +7,7 @@ type props = {
     movie: movieDTO,
 }
 
-export default function DrawerMovie({ movie }: props) {
+export default function CardMovie({ movie }: props) {
   const navigate = useNavigate()
 
     return (
@@ -26,7 +26,7 @@ export default function DrawerMovie({ movie }: props) {
                             ease: "linear"
                         }
                     }} initial={{ x: 10, opacity: 0 }} className='rounded-xl' src={movie.Poster} alt="Poster" />
-                    <h1 className='text-center md:text-lg absolute bottom-0 w-full bg-black bg-opacity-75'>{movie.Title}</h1>
+                    <h1 className='text-center hidden md:block md:text-lg absolute bottom-0 w-full bg-black bg-opacity-75 xl:py-4 px-4'>{movie.Title}</h1>
                 </div>
 
             </div>

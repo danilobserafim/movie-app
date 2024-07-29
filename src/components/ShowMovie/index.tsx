@@ -4,7 +4,7 @@ import { Badge } from '../ui/badge'
 import { movieDTO } from '../../DTOs/MovieDTO'
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import { AiFillCheckCircle } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 import AcordeonSeasons from '../AcordeonSeasons';
 
 const { VITE_API_BASE_URL } = import.meta.env
@@ -40,8 +40,8 @@ export default function ShowMovie({ movie }: Props) {
                 <div className='flex justify-between items-center  mb-4 mt-[-8px]'>
                     <h1 className='text-2xl font-bold'>{movie.Title}</h1>
                     {movie.Type !== "episode" && <Button onClick={LikeMovie} variant={'ghost'} className='active:scale-90  text-2xl z-20'>{liked ?
-                        (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle className='text-green-500' /></motion.div>) :
-                        (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillCheckCircle /></motion.div>)}
+                        (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillHeart className='text-red-500' /></motion.div>) :
+                        (<motion.div variants={animateLike} animate="visible" initial="hidden"><AiFillHeart /></motion.div>)}
                     </Button>}
                 </div>
                 <p className='text-gray-500 font-semibold text-md'>
